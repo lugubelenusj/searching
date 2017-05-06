@@ -1,11 +1,10 @@
 public class ClosedList {
 
     // TODO maybe I should do closed hashing instead, and make the size = 181,440?
-    public final int SIZE;
+    public static final int SIZE = 199;
     private Node[] array;
 
-    public ClosedList(int size, Node array) {
-        this.SIZE = size;
+    public ClosedList() {
         this.array = new Node[SIZE];
     }
 
