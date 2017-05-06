@@ -1,4 +1,3 @@
-
 public class Search {
 
 
@@ -11,8 +10,8 @@ public class Search {
 	 *         path to the original state can be found by following the parent pointers)
 	 */
 	public static State doSearch(State initial, State goal, SearchType searchType, boolean printNumberOfExpandedStates)	{
-
 	    // TODO:  Fill me in!
+		return null;
 	}
 
 }
