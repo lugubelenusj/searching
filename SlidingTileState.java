@@ -50,7 +50,12 @@ public class SlidingTileState implements State {
         output = addBorder(output);
         for (int h = 0; h < height; h++) {
             for (int w = 0; w < width; w++) {
-                output += "|" + tiles[w][h];
+                if (tiles[w][h] == 0) {
+                    output += "|" + " ";
+                }
+                else {
+                    output += "|" + tiles[w][h];
+                }
             }
             output += "|\n";
             output = addBorder(output);
