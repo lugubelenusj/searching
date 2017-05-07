@@ -45,7 +45,7 @@ public class SlidingTileState implements State {
         return this.toString().equals(other.toString());
     }
 	
-	public String toString() {
+    public String toString() {
         String output = "";
         output = addBorder(output);
         for (int h = 0; h < height; h++) {
