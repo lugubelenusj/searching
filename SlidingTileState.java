@@ -4,6 +4,7 @@ public class SlidingTileState implements State {
     private int height;
     private int[][] tiles;
     private SlidingTileState parent;
+    private float gValue;
 
     /**
      * External Constructor
@@ -12,6 +13,7 @@ public class SlidingTileState implements State {
         this.width = width;
         this.height = height;
         this.parent = null;
+        this.gValue = 0;
 
         tiles = new int[width][height];
         int i = 0;
@@ -31,6 +33,7 @@ public class SlidingTileState implements State {
         this.height = height;
         this.tiles = tiles;
         this.parent = parent;
+        this.gValue = parent.gValue + 1;
     }
 
     public State[] getChildren() {
@@ -72,7 +75,7 @@ public class SlidingTileState implements State {
     }
 
     public float gValue() {
-        return 0;
+        return gValue;
     }
     
     public int hashCode() {
