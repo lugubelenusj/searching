@@ -33,18 +33,18 @@ public class SlidingTileState implements State {
         this.parent = parent;
     }
 
-	public State[] getChildren() {
+    public State[] getChildren() {
         return null;
     }
-	
-	public State getParent() {
+    
+    public State getParent() {
         return this.parent;
     }
 
     public boolean equals(State other) {
         return this.toString().equals(other.toString());
     }
-	
+    
     public String toString() {
         String output = "";
         output = addBorder(output);
@@ -66,23 +66,23 @@ public class SlidingTileState implements State {
         return output;
     }
 
-	public float gValue() {
+    public float gValue() {
         return 0;
     }
-	
-	public int hashCode() {
+    
+    public int hashCode() {
         return 0;
     }
-	
-	public String solutionPath() {
+    
+    public String solutionPath() {
         return null;
     }
 
-	public String solutionPathExtended() {
+    public String solutionPathExtended() {
         return null;
     }
-	
-	public float distanceToState(State otherState) {
+    
+    public float distanceToState(State otherState) {
         return 0;
     }
 
