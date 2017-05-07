@@ -71,7 +71,13 @@ public class SlidingTileState implements State {
     }
     
     public int hashCode() {
-        return 0;
+        int total = 0;
+        for (int h = 0; h < height; h++) {
+            for (int w = 0; w < width; w++) {
+                total += tiles[w][h];
+            }
+        }
+        return total % ClosedList.SIZE;
     }
     
     public String solutionPath() {
