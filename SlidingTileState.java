@@ -2,14 +2,31 @@ public class SlidingTileState implements State {
 
     private int width;
     private int height;
-    private int[] tiles;
+    private int[][] tiles;
     private SlidingTileState parent;
 
-    public SlidingTileState(int width, int height, int[] tiles) {
-        this(width, height, tiles, null);
+    /**
+     * External Constructor
+     */
+    public SlidingTileState(int width, int height, int[] nums) {
+        this.width = width;
+        this.height = height;
+        this.parent = null;
+
+        tiles = new int[width][height];
+        int i = 0;
+        for (int h = 0; h < height; h++) {
+            for (int w = 0; w < width; w++) {
+                tiles[w][h] = nums[i];
+                i++;
+            }
+        }
     }
 
-    public SlidingTileState(int width, int height, int[] tiles, SlidingTileState parent) {
+    /**
+     * Internal Constructor
+     */
+    public SlidingTileState(int width, int height, int[][] tiles, SlidingTileState parent) {
         this.width = width;
         this.height = height;
         this.tiles = tiles;
@@ -24,12 +41,29 @@ public class SlidingTileState implements State {
         return this.parent;
     }
 
-	public boolean equals(State other) {
-        return false;
+    public boolean equals(State other) {
+        return this.toString().equals(other.toString());
     }
 	
 	public String toString() {
-        return null;
+        String output = "";
+        output = addBorder(output);
+        for (int h = 0; h < height; h++) {
+            for (int w = 0; w < width; w++) {
+                output += "|" + tiles[w][h];
+            }
+            output += "|\n";
+            output = addBorder(output);
+        }
+        return output;
+    }
+
+    private String addBorder(String output) {
+        for (int w = 0; w < width; w++) {
+            output += "+-";
+        }
+        output += "+\n";
+        return output;
     }
 
 	public float gValue() {
