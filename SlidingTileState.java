@@ -120,13 +120,14 @@ public class SlidingTileState implements State {
     }
     
     public int hashCode() {
-        int total = 0;
+        String total = "";
         for (int h = 0; h < height; h++) {
             for (int w = 0; w < width; w++) {
                 total += tiles[w][h];
             }
         }
-        return total % ClosedList.SIZE;
+        int num = Integer.parseInt(total);
+        return num % ClosedList.SIZE;
     }
     
     public String solutionPath() {
