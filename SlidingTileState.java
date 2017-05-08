@@ -41,8 +41,8 @@ public class SlidingTileState implements State {
         State[] children = new State[4];
 
         // Finds the location of the empty tile.
-        int x;
-        int y;
+        int x = 0;
+        int y = 0;
         for (int h = 0; h < height; h++) {
             for (int w = 0; w < width; w++) {
                 if (tiles[w][h] == 0) {
@@ -52,32 +52,33 @@ public class SlidingTileState implements State {
             }
         }
 
-        // Create all possible children.
-        // TODO int can't be null, find another way to check if its out of bounds. Maybe a min and max num, for example 0 and width.
-        if (tiles[x+1][y] != null) {
+        // Adds all possible children to the array.
+        if (x+1 < width) {
             int[][] afterMove = tiles;
             afterMove[x][y] = tiles[x+1][y];
             afterMove[x+1][y] = 0;
             children[0] = new SlidingTileState(width, height, afterMove, this);
         }
-        if (tiles[x-1][y] != null) {
+        if (x-1 >= 0) {
             int[][] afterMove = tiles;
             afterMove[x][y] = tiles[x-1][y];
             afterMove[x-1][y] = 0;
             children[1] = new SlidingTileState(width, height, afterMove, this);
         }
-        if (tiles[x][y+1] != null) {
+        if (y+1 < height) {
             int[][] afterMove = tiles;
             afterMove[x][y] = tiles[x][y+1];
             afterMove[x][y+1] = 0;
             children[2] = new SlidingTileState(width, height, afterMove, this);
         }
-        if (tiles[x][y-1] != null) {
+        if (y-1 >= 0) {
             int[][] afterMove = tiles;
             afterMove[x][y] = tiles[x][y-1];
             afterMove[x][y-1] = 0;
             children[3] = new SlidingTileState(width, height, afterMove, this);
         }
+
+        return children;
     }
     
     public State getParent() {
