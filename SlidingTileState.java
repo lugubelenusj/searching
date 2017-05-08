@@ -5,6 +5,7 @@ public class SlidingTileState implements State {
     private int[][] tiles;
     private SlidingTileState parent;
     private float gValue;
+    private int movedNum;
 
     /**
      * External Constructor
@@ -14,6 +15,7 @@ public class SlidingTileState implements State {
         this.height = height;
         this.parent = null;
         this.gValue = 0;
+        movedNum = -1;
 
         // Fills a 2D array (tiles) with the given 1D array (nums).
         tiles = new int[width][height];
@@ -29,10 +31,11 @@ public class SlidingTileState implements State {
     /**
      * Internal Constructor
      */
-    public SlidingTileState(int width, int height, int[][] tiles, SlidingTileState parent) {
+    public SlidingTileState(int width, int height, int[][] tiles, int movedNum, SlidingTileState parent) {
         this.width = width;
         this.height = height;
         this.tiles = tiles;
+        this.movedNum = movedNum;
         this.parent = parent;
         this.gValue = parent.gValue + 1;
     }
@@ -57,25 +60,25 @@ public class SlidingTileState implements State {
             int[][] afterMove = tiles;
             afterMove[x][y] = tiles[x+1][y];
             afterMove[x+1][y] = 0;
-            children[0] = new SlidingTileState(width, height, afterMove, this);
+            children[0] = new SlidingTileState(width, height, afterMove, tiles[x+1][y], this);
         }
         if (x-1 >= 0) {
             int[][] afterMove = tiles;
             afterMove[x][y] = tiles[x-1][y];
             afterMove[x-1][y] = 0;
-            children[1] = new SlidingTileState(width, height, afterMove, this);
+            children[1] = new SlidingTileState(width, height, afterMove, tiles[x-1][y], this);
         }
         if (y+1 < height) {
             int[][] afterMove = tiles;
             afterMove[x][y] = tiles[x][y+1];
             afterMove[x][y+1] = 0;
-            children[2] = new SlidingTileState(width, height, afterMove, this);
+            children[2] = new SlidingTileState(width, height, afterMove, tiles[x][y+1], this);
         }
         if (y-1 >= 0) {
             int[][] afterMove = tiles;
             afterMove[x][y] = tiles[x][y-1];
             afterMove[x][y-1] = 0;
-            children[3] = new SlidingTileState(width, height, afterMove, this);
+            children[3] = new SlidingTileState(width, height, afterMove, tiles[x][y-1], this);
         }
 
         return children;
@@ -131,7 +134,23 @@ public class SlidingTileState implements State {
     }
     
     public String solutionPath() {
-        return null;
+        return solutionPath(this, "");
+    }
+
+    private String solutionPath(SlidingTileState state, String output) {
+        if (((SlidingTileState) state.getParent()).getMovedNum() < 0) {
+            output += state.getMovedNum() + ",";
+            return output;
+        }
+        else {
+            output += solutionPath((SlidingTileState) state.getParent(), output);
+            output += state.getMovedNum() + ",";
+            return output;
+        }
+    }
+
+    public int getMovedNum() {
+        return this.movedNum;
     }
 
     public String solutionPathExtended() {
