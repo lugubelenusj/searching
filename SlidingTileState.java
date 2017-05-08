@@ -134,7 +134,27 @@ public class SlidingTileState implements State {
     }
 
     public String solutionPathExtended() {
-        return null;
+        return solutionPathExtended(this, "");
+    }
+
+    private String solutionPathExtended(SlidingTileState state, String output) {
+        if (state.getParent() == null) {
+            output += state.toString();
+            for (int i = 0; i < width; i++) {
+                output += "-";
+            }
+            output += "\n";
+            return output;
+        }
+        else {
+            output += solutionPathExtended((SlidingTileState) state.getParent(), output);
+            output += state.toString();
+            for (int i = 0; i < width; i++) {
+                output += "-";
+            }
+            output += "\n";
+            return output;
+        }
     }
     
     public float distanceToState(State otherState) {
