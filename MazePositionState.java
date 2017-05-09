@@ -1,11 +1,18 @@
 public class MazePositionState implements State {
 
-    public MazePositionState(String maze, int x, int y) {
+    private int x;
+    private int y;
+    private float gValue;
 
+    public MazePositionState(String maze, int x, int y) {
+        this.x = x;
+        this.y = y;
+        this.gValue = 0;
     }
 
     public MazePositionState(String maze, int x, int y, MazePositionState parent) {
-
+        this.x = x;
+        this.y = y;
     }
 
 	public State[] getChildren() {
@@ -25,7 +32,7 @@ public class MazePositionState implements State {
     }
 
 	public float gValue() {
-        return 0;
+        return this.gValue;
     }
 	
 	public int hashCode() {

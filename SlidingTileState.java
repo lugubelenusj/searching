@@ -37,7 +37,7 @@ public class SlidingTileState implements State {
         this.tiles = tiles;
         this.movedNum = movedNum;
         this.parent = parent;
-        this.gValue = parent.gValue + 1;
+        this.gValue = parent.gValue() + 1;
     }
 
     public State[] getChildren() {
@@ -204,7 +204,7 @@ public class SlidingTileState implements State {
     }
 
     public int[][] getTiles() {
-        return tiles;
+        return this.tiles;
     }
 
 }
