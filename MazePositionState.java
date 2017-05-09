@@ -15,44 +15,44 @@ public class MazePositionState implements State {
         this.y = y;
     }
 
-	public State[] getChildren() {
+    public State[] getChildren() {
 
         return null;
     }
-	
-	public State getParent() {
+    
+    public State getParent() {
         return null;
     }
-	
-	public boolean equals(State other) {
+    
+    public boolean equals(State other) {
         return false;
     }
-	
-	public String toString() {
+    
+    public String toString() {
         return "(" + x + "," + y + ")";
     }
 
-	public float gValue() {
+    public float gValue() {
         return this.gValue;
     }
-	
-	public int hashCode() {
+    
+    public int hashCode() {
         String strX = String.valueOf(x);
         String strY = String.valueOf(y);
         String xy = strX + strY;
         int code = Integer.parseInt(xy) % ClosedList.SIZE;
         return code;
     }
-	
-	public String solutionPath() {
+    
+    public String solutionPath() {
         return null;
     }
 
-	public String solutionPathExtended() {
+    public String solutionPathExtended() {
         return null;
     }
 
-	public float distanceToState(State otherState) {
+    public float distanceToState(State otherState) {
         return 0;
     }
 
