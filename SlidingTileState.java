@@ -15,7 +15,7 @@ public class SlidingTileState implements State {
         this.height = height;
         this.parent = null;
         this.gValue = 0;
-        movedNum = -1;
+        this.movedNum = -1;
 
         // Fills a 2D array (tiles) with the given 1D array (nums).
         tiles = new int[width][height];
@@ -178,7 +178,33 @@ public class SlidingTileState implements State {
     }
     
     public float distanceToState(State otherState) {
-        return 0;
+        int[][] otherTiles = ((SlidingTileState) otherState).getTiles();
+        float total = 0;
+
+        // Go through every num in this board.
+        for (int h = 0; h < height; h++) {
+            for (int w = 0; w < width; w++) {
+                if (this.tiles[w][h] != 0) {
+
+                    // Get the corresponding num in the other board.
+                    for (int h2 = 0; h2 < height; h2++) {
+                        for (int w2 = 0; w2 < width; w2++) {
+                            if (this.tiles[w][h] == otherTiles[w2][h2]) {
+
+                                // Add the difference in width and height to the total;
+                                total += Math.abs(w2 - w) + Math.abs(h2 - h);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return total;
+    }
+
+    public int[][] getTiles() {
+        return tiles;
     }
 
 }
