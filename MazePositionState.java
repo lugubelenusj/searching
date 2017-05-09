@@ -16,6 +16,7 @@ public class MazePositionState implements State {
     }
 
 	public State[] getChildren() {
+
         return null;
     }
 	
@@ -28,7 +29,7 @@ public class MazePositionState implements State {
     }
 	
 	public String toString() {
-        return null;
+        return "(" + x + "," + y + ")";
     }
 
 	public float gValue() {
@@ -36,7 +37,11 @@ public class MazePositionState implements State {
     }
 	
 	public int hashCode() {
-        return 0;
+        String strX = String.valueOf(x);
+        String strY = String.valueOf(y);
+        String xy = strX + strY;
+        int code = Integer.parseInt(xy) % ClosedList.SIZE;
+        return code;
     }
 	
 	public String solutionPath() {
