@@ -63,7 +63,18 @@ public class MazePositionState implements State {
     }
     
     public boolean equals(State other) {
+        if (this.x == ((MazePositionState) other).getX() && this.y == ((MazePositionState) other).getY()) {
+            return true;
+        }
         return false;
+    }
+
+    public int getX() {
+        return this.x;
+    }
+
+    public int getY() {
+        return this.y;
     }
     
     public String toString() {
