@@ -11,6 +11,7 @@ public class Search {
 	 */
 	public static State doSearch(State initial, State goal, SearchType searchType, boolean printNumberOfExpandedStates)	{
 	    OpenList openList = new OpenList();
+		openList.add(initial);
 		ClosedList closedList = new ClosedList();
 		
 		while (!openList.isEmpty()) {
