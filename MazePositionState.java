@@ -94,7 +94,19 @@ public class MazePositionState implements State {
     }
     
     public String solutionPath() {
-        return null;
+        return solutionPath(this, "");
+    }
+
+    private String solutionPath(MazePositionState state, String output) {
+        if ((MazePositionState) state.getParent() == null) {
+            output += state.toString();
+            return output;
+        }
+        else {
+            output += solutionPath((MazePositionState) state.getParent(), output);
+            output += state.toString() + ",";
+            return output;
+        }
     }
 
     public String solutionPathExtended() {
