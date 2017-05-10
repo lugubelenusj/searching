@@ -94,12 +94,15 @@ public class MazePositionState implements State {
     }
     
     public String solutionPath() {
-        return solutionPath(this, "");
+        String output = solutionPath(this, "");
+        // Remove trailing comma.
+        output = output.replaceAll(",$", "");
+        return output;
     }
 
     private String solutionPath(MazePositionState state, String output) {
         if (state.getParent() == null) {
-            output += state.toString();
+            output += state.toString() + ",";
             return output;
         }
         else {

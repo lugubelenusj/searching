@@ -134,7 +134,10 @@ public class SlidingTileState implements State {
     }
     
     public String solutionPath() {
-        return solutionPath(this, "");
+        String output = solutionPath(this, "");
+        // Remove trailing comma.
+        output = output.replaceAll(",$", "");
+        return output;
     }
 
     private String solutionPath(SlidingTileState state, String output) {
@@ -154,7 +157,17 @@ public class SlidingTileState implements State {
     }
 
     public String solutionPathExtended() {
-        return solutionPathExtended(this, "");
+        String output = solutionPathExtended(this, "");
+
+        // Remove trailing border.
+        String border = "";
+        for (int i = 0; i < width; i++) {
+            border += "-";
+        }
+        String regex = border + "$";
+        output = output.replaceAll(regex, "");
+
+        return output;
     }
 
     private String solutionPathExtended(SlidingTileState state, String output) {
