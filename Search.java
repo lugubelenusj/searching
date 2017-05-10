@@ -12,6 +12,7 @@ public class Search {
 	public static State doSearch(State initial, State goal, SearchType searchType, boolean printNumberOfExpandedStates)	{
 	    OpenList openList = new OpenList();
 		ClosedList closedList = new ClosedList();
+		
 		while (!openList.isEmpty()) {
 			State state = openList.poll();
 			if (!closedList.contains(state)) {
@@ -28,6 +29,7 @@ public class Search {
 				}
 			}
 		}
+
 		return null;
 	}
 
