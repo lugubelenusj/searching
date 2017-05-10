@@ -98,7 +98,7 @@ public class MazePositionState implements State {
     }
 
     private String solutionPath(MazePositionState state, String output) {
-        if ((MazePositionState) state.getParent() == null) {
+        if (state.getParent() == null) {
             output += state.toString();
             return output;
         }
@@ -110,7 +110,37 @@ public class MazePositionState implements State {
     }
 
     public String solutionPathExtended() {
-        return null;
+        char[][] graph = solutionPathExtended(this, maze);
+        
+        String output = "";
+        int rows = graph.length;
+        int cols = graph[0].length;
+
+        // Add every piece of the graph to the string one-by-one.
+        for (int j = 0; j < rows; j++) {
+            for (int i = 0; i < cols; i++) {
+                output += maze[i][j];
+            }
+            output += "\n";
+        }
+
+        return output;
+    }
+
+    private char[][] solutionPathExtended(MazePositionState state, char[][] graph) {
+        if (state.getParent() == null) {
+            int w = state.getX();
+            int h = state.getY();
+            graph[w][h] = '.';
+            return graph;
+        }
+        else {
+            graph = solutionPathExtended((MazePositionState) state.getParent(), graph);
+            int w = state.getX();
+            int h = state.getY();
+            graph[w][h] = '.';
+            return graph;
+        }
     }
 
     public float distanceToState(State otherState) {
