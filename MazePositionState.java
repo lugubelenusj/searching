@@ -147,7 +147,9 @@ public class MazePositionState implements State {
     }
 
     public float distanceToState(State otherState) {
-        return 0;
+        MazePositionState other = (MazePositionState) otherState;
+        int distance = Math.abs(this.x - other.getX()) + Math.abs(this.y - other.getY());
+        return distance;
     }
 
 }
