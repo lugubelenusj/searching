@@ -30,7 +30,7 @@ public class MazePositionState implements State {
     }
 
     public State[] getChildren() {
-        State[] children = new State[8];
+        State[] children = new State[9];
 
         // Adds all possible children to the array.
         int n = 0;
