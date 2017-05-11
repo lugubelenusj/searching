@@ -9,6 +9,7 @@ public class OpenList {
 
 
     public OpenList(State goal, SearchType searchType) {
+        this.goal = goal;
         this.searchType = searchType;
         this.maxsize = 100;
         array = new Node[maxsize];
