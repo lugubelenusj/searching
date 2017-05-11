@@ -24,16 +24,17 @@ public class ClosedList {
 
     public boolean contains(State state) {
         int hashCode = state.hashCode();
-        if (array[hashCode].data.equals(state)) {
-            return true;
-        }
-        else {
-            Node current = array[hashCode];
-            while (current.next != null) {
-                if (current.next.data.equals(state)) {
-                    return true;
+        if (array[hashCode] != null) {
+            if (array[hashCode].data.equals(state)) {
+                return true;
+            } else {
+                Node current = array[hashCode];
+                while (current.next != null) {
+                    if (current.next.data.equals(state)) {
+                        return true;
+                    }
+                    current = current.next;
                 }
-                current = current.next;
             }
         }
         return false;
