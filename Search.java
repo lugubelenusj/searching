@@ -10,7 +10,7 @@ public class Search {
 	 *         path to the original state can be found by following the parent pointers)
 	 */
 	public static State doSearch(State initial, State goal, SearchType searchType, boolean printNumberOfExpandedStates)	{
-	    OpenList openList = new OpenList(searchType);
+	    OpenList openList = new OpenList(goal, searchType);
 		openList.insert(initial);
 		ClosedList closedList = new ClosedList();
 		
@@ -24,7 +24,7 @@ public class Search {
 					closedList.add(state);
 					for (State child : state.getChildren()) {
 						if (!closedList.contains(child)) {
-							openList.add(child);
+							openList.insert(child);
 						}
 					}
 				}
