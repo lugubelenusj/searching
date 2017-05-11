@@ -13,10 +13,14 @@ public class MazePositionState implements State {
         this.gValue = 0;
         this.parent = null;
 
+
         // Convert the string maze into a 2D char array.
         String[] rows = strMaze.split("\n");
-        maze = new char[rows[0].length()][rows.length];
-        for (int i = 0; i < rows.length; i++) {
+        int rowLen = rows.length;
+        int colLen = rows[0].length();
+
+        maze = new char[colLen][rowLen];
+        for (int i = 0; i < rowLen; i++) {
             maze[i] = rows[i].toCharArray();
         }
     }
