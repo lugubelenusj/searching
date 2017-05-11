@@ -23,11 +23,12 @@ public class ClosedList {
     }
 
     public boolean contains(State state) {
-        int hashCode = state.hashCode();
-        if (array[hashCode] != null) {
+        try {
+            int hashCode = state.hashCode();
             if (array[hashCode].data.equals(state)) {
                 return true;
-            } else {
+            }
+            else {
                 Node current = array[hashCode];
                 while (current.next != null) {
                     if (current.next.data.equals(state)) {
@@ -36,6 +37,9 @@ public class ClosedList {
                     current = current.next;
                 }
             }
+        }
+        catch (NullPointerException ex) {
+            return false;
         }
         return false;
     }
