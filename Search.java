@@ -2,7 +2,7 @@ public class Search {
 
 
 	/** Do a search from the initial state to the goal state. 
-	 * 
+	 *
 	 * @param initial The state to search from 
 	 * @param goal The state to find
 	 * @param searchType The type of search to do
@@ -10,28 +10,36 @@ public class Search {
 	 *         path to the original state can be found by following the parent pointers)
 	 */
 	public static State doSearch(State initial, State goal, SearchType searchType, boolean printNumberOfExpandedStates)	{
-	    OpenList openList = new OpenList(goal, searchType);
+		int numOfExpandedStates = 0;
+		OpenList openList = new OpenList(goal, searchType);
 		openList.insert(initial);
 		ClosedList closedList = new ClosedList();
-		
+
+		State state = null;
 		while (!openList.isEmpty()) {
-			State state = openList.removeMin();
+			state = openList.removeMin();
 			if (!closedList.contains(state)) {
 				if (state.equals(goal)) {
 					return state;
 				}
 				else {
 					closedList.add(state);
+					numOfExpandedStates++;
 					for (State child : state.getChildren()) {
-						if (!closedList.contains(child)) {
+						if (!closedList.contains(child) && child != null) {
 							openList.insert(child);
+							numOfExpandedStates++;
 						}
 					}
 				}
 			}
 		}
 
-		return null;
+		if (printNumberOfExpandedStates) {
+			System.out.println(numOfExpandedStates);
+		}
+
+		return state;
 	}
 
 }
