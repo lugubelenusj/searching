@@ -11,7 +11,7 @@ public class OpenList {
     public OpenList(State goal, SearchType searchType) {
         this.goal = goal;
         this.searchType = searchType;
-        this.maxsize = 1000;
+        this.maxsize = 100000;
         array = new Node[maxsize];
         // This is a dummy node, to always be on top.
         array[0] = new Node(new DummyState(), -1);

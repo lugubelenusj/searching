@@ -58,31 +58,43 @@ public class SlidingTileState implements State {
 
         // Adds all possible children to the array.
         if (x+1 < width) {
-            int[][] afterMove = tiles;
+            int[][] afterMove = new int[width][height];
+            make2dCopy(afterMove);
             afterMove[x][y] = tiles[x+1][y];
             afterMove[x+1][y] = 0;
             children[0] = new SlidingTileState(width, height, afterMove, tiles[x+1][y], this);
         }
         if (x-1 >= 0) {
-            int[][] afterMove = tiles;
+            int[][] afterMove = new int[width][height];
+            make2dCopy(afterMove);
             afterMove[x][y] = tiles[x-1][y];
             afterMove[x-1][y] = 0;
             children[1] = new SlidingTileState(width, height, afterMove, tiles[x-1][y], this);
         }
         if (y+1 < height) {
-            int[][] afterMove = tiles;
+            int[][] afterMove = new int[width][height];
+            make2dCopy(afterMove);
             afterMove[x][y] = tiles[x][y+1];
             afterMove[x][y+1] = 0;
             children[2] = new SlidingTileState(width, height, afterMove, tiles[x][y+1], this);
         }
         if (y-1 >= 0) {
-            int[][] afterMove = tiles;
+            int[][] afterMove = new int[width][height];
+            make2dCopy(afterMove);
             afterMove[x][y] = tiles[x][y-1];
             afterMove[x][y-1] = 0;
             children[3] = new SlidingTileState(width, height, afterMove, tiles[x][y-1], this);
         }
 
         return children;
+    }
+
+    private void make2dCopy(int[][] target) {
+        for (int h = 0; h < height; h++) {
+            for (int w = 0; w < width; w++) {
+                target[w][h] = tiles[w][h];
+            }
+        }
     }
     
     public State getParent() {
