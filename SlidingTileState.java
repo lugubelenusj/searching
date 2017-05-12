@@ -129,8 +129,9 @@ public class SlidingTileState implements State {
                 total += tiles[w][h];
             }
         }
-        int num = Integer.parseInt(total);
-        return num % ClosedList.SIZE;
+        long num = Long.parseLong(total.substring(total.length()/2));
+        int code = (int) (num % ClosedList.SIZE);
+        return code;
     }
     
     public String solutionPath() {
@@ -141,7 +142,7 @@ public class SlidingTileState implements State {
     }
 
     private String solutionPath(SlidingTileState state, String output) {
-        if (((SlidingTileState) state.getParent()).getMovedNum() < 0) {
+        if (state.getParent() == null) {
             output += state.getMovedNum() + ",";
             return output;
         }
@@ -162,7 +163,7 @@ public class SlidingTileState implements State {
         // Remove trailing border.
         String border = "";
         for (int i = 0; i < width; i++) {
-            border += "-";
+            border += "--";
         }
         String regex = border + "$";
         output = output.replaceAll(regex, "");
@@ -174,7 +175,7 @@ public class SlidingTileState implements State {
         if (state.getParent() == null) {
             output += state.toString();
             for (int i = 0; i < width; i++) {
-                output += "-";
+                output += "--";
             }
             output += "\n";
             return output;
@@ -183,7 +184,7 @@ public class SlidingTileState implements State {
             output += solutionPathExtended((SlidingTileState) state.getParent(), output);
             output += state.toString();
             for (int i = 0; i < width; i++) {
-                output += "-";
+                output += "--";
             }
             output += "\n";
             return output;
