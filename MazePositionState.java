@@ -19,7 +19,7 @@ public class MazePositionState implements State {
         int rowLen = rows.length;
         int colLen = rows[0].length();
 
-        maze = new char[colLen][rowLen];
+        maze = new char[rowLen][colLen];
         for (int i = 0; i < rowLen; i++) {
             maze[i] = rows[i].toCharArray();
         }
@@ -116,24 +116,6 @@ public class MazePositionState implements State {
         }
     }
 
-    // public String solutionPathExtended() {
-    //     char[][] graph = solutionPathExtended(this, maze);
-        
-    //     String output = "";
-    //     int rows = graph.length;
-    //     int cols = graph[0].length;
-
-    //     // Add every piece of the graph to the string one-by-one.
-    //     for (int j = 0; j < rows; j++) {
-    //         for (int i = 0; i < cols; i++) {
-    //             output += maze[i][j];
-    //         }
-    //         output += "\n";
-    //     }
-
-    //     return output;
-    // }
-
     public String solutionPathExtended() {
         char[][] graph = solutionPathExtended(this, maze);
         
@@ -142,20 +124,14 @@ public class MazePositionState implements State {
         int cols = graph[0].length;
 
         // Add every piece of the graph to the string one-by-one.
-        try {
-            for (int j = 0; j < rows; j++) {
-                for (int i = 0; i < cols; i++) {
-                    output += maze[i][j];
-                }
-                output += "\n";
+        for (int j = 0; j < rows; j++) {
+            for (int i = 0; i < cols; i++) {
+                output += maze[j][i];
             }
-        }
-        catch (Exception e) {
             output += "\n";
         }
-        finally {
-            return output;
-        }
+
+        return output;
     }
 
     private char[][] solutionPathExtended(MazePositionState state, char[][] graph) {

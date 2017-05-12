@@ -56,9 +56,6 @@ public class SlidingTileState implements State {
             }
         }
 
-        // System.out.print("x: " + x + " y: " + y + " ");//
-        // System.out.println("tiles[x][y]: " + tiles[x][y]);//
-
         // Adds all possible children to the array.
         if (x+1 < width) {
             int[][] afterMove = tiles;
@@ -66,19 +63,19 @@ public class SlidingTileState implements State {
             afterMove[x+1][y] = 0;
             children[0] = new SlidingTileState(width, height, afterMove, tiles[x+1][y], this);
         }
-        else if (x-1 >= 0) {
+        if (x-1 >= 0) {
             int[][] afterMove = tiles;
             afterMove[x][y] = tiles[x-1][y];
             afterMove[x-1][y] = 0;
             children[1] = new SlidingTileState(width, height, afterMove, tiles[x-1][y], this);
         }
-        else if (y+1 < height) {
+        if (y+1 < height) {
             int[][] afterMove = tiles;
             afterMove[x][y] = tiles[x][y+1];
             afterMove[x][y+1] = 0;
             children[2] = new SlidingTileState(width, height, afterMove, tiles[x][y+1], this);
         }
-        else if (y-1 >= 0) {
+        if (y-1 >= 0) {
             int[][] afterMove = tiles;
             afterMove[x][y] = tiles[x][y-1];
             afterMove[x][y-1] = 0;
@@ -93,7 +90,15 @@ public class SlidingTileState implements State {
     }
 
     public boolean equals(State other) {
-        return this.toString().equals(other.toString());
+        int[][] otherTiles = ((SlidingTileState) other).getTiles();
+        for (int j = 0; j < height; j++) {
+            for (int i = 0; i < width; i++) {
+                if (tiles[i][j] != otherTiles[i][j]) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
     
     public String toString() {
