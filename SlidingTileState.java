@@ -10,6 +10,7 @@ public class SlidingTileState implements State {
     /**
      * External Constructor
      */
+    // All elements are put into tiles.
     public SlidingTileState(int width, int height, int[] nums) {
         this.width = width;
         this.height = height;
@@ -55,6 +56,9 @@ public class SlidingTileState implements State {
             }
         }
 
+        // System.out.print("x: " + x + " y: " + y + " ");//
+        // System.out.println("tiles[x][y]: " + tiles[x][y]);//
+
         // Adds all possible children to the array.
         if (x+1 < width) {
             int[][] afterMove = tiles;
@@ -62,19 +66,19 @@ public class SlidingTileState implements State {
             afterMove[x+1][y] = 0;
             children[0] = new SlidingTileState(width, height, afterMove, tiles[x+1][y], this);
         }
-        if (x-1 >= 0) {
+        else if (x-1 >= 0) {
             int[][] afterMove = tiles;
             afterMove[x][y] = tiles[x-1][y];
             afterMove[x-1][y] = 0;
             children[1] = new SlidingTileState(width, height, afterMove, tiles[x-1][y], this);
         }
-        if (y+1 < height) {
+        else if (y+1 < height) {
             int[][] afterMove = tiles;
             afterMove[x][y] = tiles[x][y+1];
             afterMove[x][y+1] = 0;
             children[2] = new SlidingTileState(width, height, afterMove, tiles[x][y+1], this);
         }
-        if (y-1 >= 0) {
+        else if (y-1 >= 0) {
             int[][] afterMove = tiles;
             afterMove[x][y] = tiles[x][y-1];
             afterMove[x][y-1] = 0;
@@ -157,6 +161,7 @@ public class SlidingTileState implements State {
         return this.movedNum;
     }
 
+    // Here already has multiple 0s.
     public String solutionPathExtended() {
         String output = solutionPathExtended(this, "");
 
