@@ -1,0 +1,5 @@
+A program that is able to solve a sliding tile puzzle as well as a maze using an algorithm I wrote, which was influenced by Dijkstra's algorithm for searching graphs. 
+
+In the case of solving a sliding tile puzzle, the algorithm takes into consideration possible states of the board that can be reached depending on which tile is moved. The algorithm makes use of a min-heap based priority queue, as well as an open hash table to keep track of known and found states. Using one of three possible heuristics: Manhattan distance, A*, or greedy, the program generates a value for each state and chooses the best possible value based on the heuristic, that will lead to the goal state the fastest. The program can also print out the steps to solve the puzzle, and all the sliding tile states along the way.
+
+Solving the maze is also done in a similar manner. The same type of algorithm and heuristics are used. Depending on what heuristic is chosen, the program returns different possible paths to get to the goal. The program here also makes use of states and heuristics to choose the next best possible state to finish the maze.
